@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "CodeBuild install commands go here."
+  pre_build:
+    commands:
+      - echo "CodeBuild pre_build commands go here."
+  build:
+    commands:
+      - echo "CodeBuild build commands go here."
+  post_build:
+    commands:
+      - echo "CodeBuild post_build commands go here."
