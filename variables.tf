@@ -92,7 +92,7 @@ variable "resource_names_map" {
   ))
   default = {
     pipeline = {
-      name       = "pipeline"
+      name       = "pln"
       max_length = 63
     }
     function = {
