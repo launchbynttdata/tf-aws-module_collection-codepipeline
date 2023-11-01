@@ -60,3 +60,6 @@ azure_env.sh
 
 # Pre-commit hook
 .pre-commit-config.yaml
+
+# Pipeline v2 
+temp/

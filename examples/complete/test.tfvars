@@ -1,61 +1,8 @@
 # Replace the <> with the actual values
+null_resource_aws_profile = "launch"
 pipelines = [
   {
-    name             = "pr_event"
-    create_s3_source = true
-    source_stage = {
-      stage_name = "Source"
-      name       = "Source"
-      category   = "Source"
-      owner      = "AWS"
-      provider   = "S3"
-      version    = "1"
-      configuration = {
-        S3ObjectKey          = "trigger_pipeline.zip"
-        PollForSourceChanges = "false"
-      }
-      input_artifacts  = []
-      output_artifacts = ["SourceArtifact"]
-      run_order        = null
-      region           = null
-      namespace        = null
-    }
-    stages = [
-      {
-        stage_name       = "Simulated-Merge"
-        name             = "Sim-Merge"
-        category         = "Build"
-        owner            = "AWS"
-        provider         = "CodeBuild"
-        project_name     = "sim_merge"
-        buildspec        = "sim_merge.yml"
-        version          = "1"
-        configuration    = {}
-        input_artifacts  = ["SourceArtifact"]
-        output_artifacts = []
-        run_order        = null
-        region           = null
-        namespace        = null
-      },
-      {
-        stage_name       = "Terragrunt-Plan"
-        name             = "TG-Plan"
-        category         = "Build"
-        owner            = "AWS"
-        provider         = "CodeBuild"
-        project_name     = "tg_plan"
-        buildspec        = "tg_plan.yml"
-        version          = "1"
-        configuration    = {}
-        input_artifacts  = ["SourceArtifact"]
-        output_artifacts = []
-        run_order        = null
-        region           = null
-        namespace        = null
-      }
-    ]
-  },
-  {
+    pipelineType     = "V2"
     name             = "pr_merge"
     create_s3_source = true
     approval_sns_subscribers = [
@@ -97,10 +44,6 @@ pipelines = [
         version          = "1"
         configuration    = {}
         input_artifacts  = ["SourceArtifact"]
-        output_artifacts = []
-        run_order        = null
-        region           = null
-        namespace        = null
       },
       {
         stage_name       = "Trigger-QA"
@@ -113,10 +56,6 @@ pipelines = [
         version          = "1"
         configuration    = {}
         input_artifacts  = ["SourceArtifact"]
-        output_artifacts = []
-        run_order        = null
-        region           = null
-        namespace        = null
       },
       {
         stage_name       = "Manual-Approval"
@@ -127,10 +66,6 @@ pipelines = [
         version          = "1"
         configuration    = {}
         input_artifacts  = []
-        output_artifacts = []
-        run_order        = null
-        region           = null
-        namespace        = null
       }
     ]
   }

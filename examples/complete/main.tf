@@ -15,6 +15,7 @@ module "codepipeline" {
 
   additional_codebuild_projects = var.additional_codebuild_projects
   pipelines                     = var.pipelines
+  null_resource_aws_profile     = var.null_resource_aws_profile
 
   tags = var.tags
 }
