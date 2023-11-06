@@ -122,6 +122,6 @@ variable "tags" {
 
 variable "null_resource_aws_profile" {
   description = "Temporary variable to identify the AWS profile to use for CodePipeline Deployment until provider supports pipeline versions."
-  type        = any
+  type        = string
   default     = null
 }

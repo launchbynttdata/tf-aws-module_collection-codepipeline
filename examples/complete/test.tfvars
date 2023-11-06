@@ -34,38 +34,38 @@ pipelines = [
     }
     stages = [
       {
-        stage_name       = "Terragrunt-Plan"
-        name             = "TG-Plan"
-        category         = "Build"
-        owner            = "AWS"
-        provider         = "CodeBuild"
-        project_name     = "tg_plan"
-        buildspec        = "buildspec.yml"
-        version          = "1"
-        configuration    = {}
-        input_artifacts  = ["SourceArtifact"]
+        stage_name      = "Terragrunt-Plan"
+        name            = "TG-Plan"
+        category        = "Build"
+        owner           = "AWS"
+        provider        = "CodeBuild"
+        project_name    = "tg_plan"
+        buildspec       = "buildspec.yml"
+        version         = "1"
+        configuration   = {}
+        input_artifacts = ["SourceArtifact"]
       },
       {
-        stage_name       = "Trigger-QA"
-        name             = "Trigger-Env"
-        category         = "Build"
-        owner            = "AWS"
-        provider         = "CodeBuild"
-        project_name     = "trigger_env"
-        buildspec        = "buildspec.yml"
-        version          = "1"
-        configuration    = {}
-        input_artifacts  = ["SourceArtifact"]
+        stage_name      = "Trigger-QA"
+        name            = "Trigger-Env"
+        category        = "Build"
+        owner           = "AWS"
+        provider        = "CodeBuild"
+        project_name    = "trigger_env"
+        buildspec       = "buildspec.yml"
+        version         = "1"
+        configuration   = {}
+        input_artifacts = ["SourceArtifact"]
       },
       {
-        stage_name       = "Manual-Approval"
-        name             = "Manual-Approval"
-        category         = "Approval"
-        owner            = "AWS"
-        provider         = "Manual"
-        version          = "1"
-        configuration    = {}
-        input_artifacts  = []
+        stage_name      = "Manual-Approval"
+        name            = "Manual-Approval"
+        category        = "Approval"
+        owner           = "AWS"
+        provider        = "Manual"
+        version         = "1"
+        configuration   = {}
+        input_artifacts = []
       }
     ]
   }

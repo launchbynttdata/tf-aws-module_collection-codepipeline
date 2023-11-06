@@ -81,7 +81,7 @@ module "resource_names" {
 # This is needed until Terraform supports CodePipeline versions
 # https://github.com/hashicorp/terraform-provider-aws/issues/34122
 resource "null_resource" "get_pipeline_stages" {
-  for_each = { for idx, pipeline in local.v2_pipelines: idx => pipeline}
+  for_each = { for idx, pipeline in local.v2_pipelines : idx => pipeline }
 
   provisioner "local-exec" {
     command = "mkdir -p ${local.json_path} && aws codepipeline get-pipeline --region ${var.region} --profile ${var.null_resource_aws_profile} --name ${module.codepipeline[index(local.v2_pipelines, each.value)].id} --output json > ${local.json_path}/pipeline_output.json && jq '.pipeline.pipelineType = \"V2\" | del(.metadata)' ${local.json_path}/pipeline_output.json > ${local.json_path}/${index(local.v2_pipelines, each.value)}_pipeline_stages.json"
@@ -89,8 +89,8 @@ resource "null_resource" "get_pipeline_stages" {
 }
 
 data "local_file" "codepipeline_file" {
-  count = var.null_resource_aws_profile != null ? length(null_resource.get_pipeline_stages) : 0
-  depends_on = [ null_resource.get_pipeline_stages ]
+  count      = var.null_resource_aws_profile != null ? length(null_resource.get_pipeline_stages) : 0
+  depends_on = [null_resource.get_pipeline_stages]
 
   filename = "${local.json_path}/${count.index}_pipeline_stages.json"
 }

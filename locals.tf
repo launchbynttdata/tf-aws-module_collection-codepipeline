@@ -139,6 +139,6 @@ locals {
   # https://github.com/hashicorp/terraform-provider-aws/issues/34122
   json_path = "${path.module}/temp/pipeline_v2_structure"
 
-  v2_pipelines =  [ for pipeline in module.codepipeline : pipeline if pipeline.pipelineType== "V2" ]
+  v2_pipelines = [for pipeline in module.codepipeline : pipeline if pipeline.pipelineType == "V2"]
 
 }
