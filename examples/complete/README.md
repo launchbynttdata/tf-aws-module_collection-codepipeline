@@ -33,6 +33,7 @@ No resources.
 | <a name="input_resource_number"></a> [resource\_number](#input\_resource\_number) | The resource count for the respective resource. Defaults to 000. Increments in value of 1 | `string` | `"000"` | no |
 | <a name="input_resource_names_map"></a> [resource\_names\_map](#input\_resource\_names\_map) | A map of key to resource\_name that will be used by cloudposse/label/null module to generate resource names | `map(string)` | <pre>{<br>  "cache": "cache",<br>  "security_group": "sg"<br>}</pre> | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to the resources created by the module. | `map(string)` | `{}` | no |
+| <a name="input_null_resource_aws_profile"></a> [null\_resource\_aws\_profile](#input\_null\_resource\_aws\_profile) | Temporary variable to identify the AWS profile to use for CodePipeline Deployment until provider supports pipeline versions. | `string` | `null` | no |
 
 ## Outputs
 
