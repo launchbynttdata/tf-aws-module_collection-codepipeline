@@ -69,7 +69,6 @@ git-auth:
 
 define config
 	@set -ex; \
-	git config --global http.extraheader "AUTHORIZATION: $(1)"; \
 	git config --global http.https://gerrit.googlesource.com/git-repo/.extraheader ''; \
 	git config --global http.version HTTP/1.1;
 endef
