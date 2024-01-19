@@ -5,21 +5,19 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0, <= 1.5.5 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.23.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.32.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 5.27.0 |
-| <a name="provider_null"></a> [null](#provider\_null) | 3.2.2 |
-| <a name="provider_local"></a> [local](#provider\_local) | 2.4.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_codepipeline"></a> [codepipeline](#module\_codepipeline) | git::https://github.com/nexient-llc/tf-aws-module-codepipeline.git | 0.1.0 |
+| <a name="module_codepipeline"></a> [codepipeline](#module\_codepipeline) | git::https://github.com/nexient-llc/tf-aws-module-codepipeline.git | 0.1.1 |
 | <a name="module_codebuild"></a> [codebuild](#module\_codebuild) | git::https://github.com/nexient-llc/tf-aws-wrapper_module-codebuild.git | 0.1.0 |
 | <a name="module_additional_codebuild_projects"></a> [additional\_codebuild\_projects](#module\_additional\_codebuild\_projects) | git::https://github.com/nexient-llc/tf-aws-wrapper_module-codebuild.git | 0.1.0 |
 | <a name="module_sns_topic"></a> [sns\_topic](#module\_sns\_topic) | git::https://github.com/nexient-llc/tf-aws-wrapper_module-sns.git | 0.1.0 |
@@ -29,10 +27,7 @@
 
 | Name | Type |
 |------|------|
-| [null_resource.get_pipeline_stages](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
-| [null_resource.invoke_aws_cli](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
-| [local_file.codepipeline_file](https://registry.terraform.io/providers/hashicorp/local/latest/docs/data-sources/file) | data source |
 
 ## Inputs
 
@@ -51,7 +46,6 @@
 | <a name="input_resource_number"></a> [resource\_number](#input\_resource\_number) | The resource count for the respective resource. Defaults to 000. Increments in value of 1 | `string` | `"000"` | no |
 | <a name="input_resource_names_map"></a> [resource\_names\_map](#input\_resource\_names\_map) | A map of key to resource\_name that will be used by tf-aws-wrapper\_module-codepipeline module to generate resource names | <pre>map(object(<br>    {<br>      name       = string<br>      max_length = optional(number, 60)<br>    }<br>  ))</pre> | <pre>{<br>  "codebuild": {<br>    "max_length": 63,<br>    "name": "cb"<br>  },<br>  "function": {<br>    "max_length": 63,<br>    "name": "fn"<br>  },<br>  "pipeline": {<br>    "max_length": 63,<br>    "name": "pln"<br>  },<br>  "s3": {<br>    "max_length": 63,<br>    "name": "s3"<br>  },<br>  "sns": {<br>    "max_length": 63,<br>    "name": "sns"<br>  }<br>}</pre> | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to the resources created by the module. | `map(string)` | `{}` | no |
-| <a name="input_null_resource_aws_profile"></a> [null\_resource\_aws\_profile](#input\_null\_resource\_aws\_profile) | Temporary variable to identify the AWS profile to use for CodePipeline Deployment until provider supports pipeline versions. | `string` | `null` | no |
 
 ## Outputs
 

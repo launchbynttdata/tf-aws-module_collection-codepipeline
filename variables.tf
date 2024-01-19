@@ -119,9 +119,3 @@ variable "tags" {
   default     = {}
   description = "A map of tags to add to the resources created by the module."
 }
-
-variable "null_resource_aws_profile" {
-  description = "Temporary variable to identify the AWS profile to use for CodePipeline Deployment until provider supports pipeline versions."
-  type        = string
-  default     = null
-}

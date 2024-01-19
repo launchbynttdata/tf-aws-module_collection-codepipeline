@@ -1,8 +1,7 @@
 # Replace the <> with the actual values
-null_resource_aws_profile = "launch"
 pipelines = [
   {
-    pipelineType     = "V2"
+    pipeline_type    = "V2"
     name             = "pr_merge"
     create_s3_source = true
     approval_sns_subscribers = [

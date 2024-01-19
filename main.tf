@@ -11,14 +11,14 @@
 // limitations under the License.
 
 module "codepipeline" {
-  source = "git::https://github.com/nexient-llc/tf-aws-module-codepipeline.git?ref=0.1.0"
+  source = "git::https://github.com/nexient-llc/tf-aws-module-codepipeline.git?ref=0.1.1"
   count  = length(local.pipelines)
 
   name             = replace(module.resource_names["pipeline"].standard, var.naming_prefix, "${var.naming_prefix}_${local.pipelines[count.index].name}")
   create_s3_source = local.pipelines[count.index].create_s3_source
   source_s3_bucket = replace(module.resource_names["s3"].standard, var.naming_prefix, "${var.naming_prefix}_${local.pipelines[count.index].name}")
   stages           = local.pipelines[count.index].stages
-  pipelineType     = local.pipelines[count.index].pipelineType
+  pipeline_type    = local.pipelines[count.index].pipeline_type
 
   tags = merge(local.tags, { resource_name = replace(module.resource_names["pipeline"].standard, var.naming_prefix, "${var.naming_prefix}_${local.pipelines[count.index].name}") })
 }
@@ -76,35 +76,4 @@ module "resource_names" {
   instance_env         = var.environment_number
   instance_resource    = var.resource_number
   maximum_length       = each.value.max_length
-}
-
-# This is needed until Terraform supports CodePipeline versions
-# https://github.com/hashicorp/terraform-provider-aws/issues/34122
-resource "null_resource" "get_pipeline_stages" {
-  triggers = { always_run = timestamp() }
-  for_each = { for idx, pipeline in local.v2_pipelines : idx => pipeline }
-
-  provisioner "local-exec" {
-    command = "mkdir -p ${local.json_path} && aws codepipeline get-pipeline --region ${var.region} --profile ${var.null_resource_aws_profile} --name ${module.codepipeline[index(local.v2_pipelines, each.value)].id} --output json > ${local.json_path}/${index(local.v2_pipelines, each.value)}_pipeline_output.json && jq '.pipeline.pipelineType = \"V2\" | del(.metadata)' ${local.json_path}/${index(local.v2_pipelines, each.value)}_pipeline_output.json > ${local.json_path}/${index(local.v2_pipelines, each.value)}_pipeline_stages.json"
-  }
-}
-
-data "local_file" "codepipeline_file" {
-  count      = var.null_resource_aws_profile != null ? length(null_resource.get_pipeline_stages) : 0
-  depends_on = [null_resource.get_pipeline_stages]
-
-  filename = "${local.json_path}/${count.index}_pipeline_stages.json"
-}
-
-resource "null_resource" "invoke_aws_cli" {
-  count = var.null_resource_aws_profile != null ? length(data.local_file.codepipeline_file) : 0
-  provisioner "local-exec" {
-    command = <<EOT
-aws codepipeline update-pipeline --cli-input-json file://${local.json_path}/${count.index}_pipeline_stages.json --region ${var.region} --profile '${var.null_resource_aws_profile}'
-EOT
-  }
-
-  depends_on = [
-    module.codepipeline
-  ]
 }
