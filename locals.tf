@@ -88,7 +88,7 @@ locals {
 
   pipelines = [
     for pipeline in range(length(var.pipelines)) : {
-      pipelineType     = try(var.pipelines[pipeline].pipelineType, null)
+      pipeline_type    = try(var.pipelines[pipeline].pipeline_type, null)
       name             = var.pipelines[pipeline].name
       create_s3_source = var.pipelines[pipeline].create_s3_source
 
@@ -134,10 +134,4 @@ locals {
   ]
 
   tags = merge(local.default_tags, var.tags)
-
-  # This is needed until Terraform supports CodePipeline versions
-  # https://github.com/hashicorp/terraform-provider-aws/issues/34122
-  json_path = "${path.module}/temp/pipeline_v2_structure"
-
-  v2_pipelines = [for pipeline in module.codepipeline : pipeline if pipeline.pipelineType == "V2"]
 }
