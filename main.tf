@@ -11,7 +11,7 @@
 // limitations under the License.
 
 module "codepipeline" {
-  source = "git::https://github.com/nexient-llc/tf-aws-module-codepipeline.git?ref=0.1.1"
+  source = "git::https://github.com/nexient-llc/tf-aws-module-codepipeline.git?ref=0.2.0"
   count  = length(local.pipelines)
 
   name             = replace(module.resource_names["pipeline"].standard, var.naming_prefix, "${var.naming_prefix}_${local.pipelines[count.index].name}")
@@ -19,6 +19,7 @@ module "codepipeline" {
   source_s3_bucket = replace(module.resource_names["s3"].standard, var.naming_prefix, "${var.naming_prefix}_${local.pipelines[count.index].name}")
   stages           = local.pipelines[count.index].stages
   pipeline_type    = local.pipelines[count.index].pipeline_type
+  execution_mode   = local.pipelines[count.index].execution_mode
 
   tags = merge(local.tags, { resource_name = replace(module.resource_names["pipeline"].standard, var.naming_prefix, "${var.naming_prefix}_${local.pipelines[count.index].name}") })
 }

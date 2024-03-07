@@ -5,19 +5,19 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.0, <= 1.5.5 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.32.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.32 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.33.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.39.1 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_codepipeline"></a> [codepipeline](#module\_codepipeline) | git::https://github.com/nexient-llc/tf-aws-module-codepipeline.git | 0.1.1 |
+| <a name="module_codepipeline"></a> [codepipeline](#module\_codepipeline) | git::https://github.com/nexient-llc/tf-aws-module-codepipeline.git | 0.2.0 |
 | <a name="module_codebuild"></a> [codebuild](#module\_codebuild) | git::https://github.com/nexient-llc/tf-aws-wrapper_module-codebuild.git | 0.1.0 |
 | <a name="module_additional_codebuild_projects"></a> [additional\_codebuild\_projects](#module\_additional\_codebuild\_projects) | git::https://github.com/nexient-llc/tf-aws-wrapper_module-codebuild.git | 0.1.0 |
 | <a name="module_sns_topic"></a> [sns\_topic](#module\_sns\_topic) | git::https://github.com/nexient-llc/tf-aws-wrapper_module-sns.git | 0.1.0 |
@@ -33,7 +33,7 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_pipelines"></a> [pipelines](#input\_pipelines) | List of all custom pipelines to create. | `any` | `""` | no |
+| <a name="input_pipelines"></a> [pipelines](#input\_pipelines) | List of all custom pipelines to create. | `list(any)` | n/a | yes |
 | <a name="input_additional_codebuild_projects"></a> [additional\_codebuild\_projects](#input\_additional\_codebuild\_projects) | Codebuild to trigger other pipelines. Used by the lambdas to trigger the correct pipeline. | `any` | `null` | no |
 | <a name="input_build_image"></a> [build\_image](#input\_build\_image) | Docker image for build environment, e.g. 'aws/codebuild/standard:2.0' or 'aws/codebuild/eb-nodejs-6.10.0-amazonlinux-64:4.0.0'. For more info: http://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref.html | `string` | `"aws/codebuild/amazonlinux2-x86_64-standard:4.0"` | no |
 | <a name="input_privileged_mode"></a> [privileged\_mode](#input\_privileged\_mode) | (Optional) If set to true, enables running the Docker daemon inside a Docker container on the CodeBuild instance. Used when building Docker images | `bool` | `false` | no |

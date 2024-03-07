@@ -22,51 +22,8 @@ variable "additional_codebuild_projects" {
   default     = null
 }
 
-### TF Module Resource variables
-variable "naming_prefix" {
-  description = "Prefix for the provisioned resources."
-  type        = string
-  default     = "platform"
-}
-
-variable "environment" {
-  description = "Environment in which the resource should be provisioned like dev, qa, prod etc."
-  type        = string
-  default     = "dev"
-}
-
-variable "environment_number" {
-  description = "The environment count for the respective environment. Defaults to 000. Increments in value of 1"
-  default     = "000"
-}
-
-variable "region" {
-  description = "AWS Region in which the infra needs to be provisioned"
-  default     = "us-east-2"
-}
-
-variable "resource_number" {
-  description = "The resource count for the respective resource. Defaults to 000. Increments in value of 1"
-  default     = "000"
-}
-
-variable "resource_names_map" {
-  description = "A map of key to resource_name that will be used by cloudposse/label/null module to generate resource names"
-  type        = map(string)
-  default = {
-    cache          = "cache"
-    security_group = "sg"
-  }
-}
-
 variable "tags" {
   type        = map(string)
   default     = {}
   description = "A map of tags to add to the resources created by the module."
-}
-
-variable "null_resource_aws_profile" {
-  description = "Temporary variable to identify the AWS profile to use for CodePipeline Deployment until provider supports pipeline versions."
-  type        = string
-  default     = null
 }

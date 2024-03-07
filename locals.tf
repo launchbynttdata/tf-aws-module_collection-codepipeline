@@ -91,6 +91,7 @@ locals {
       pipeline_type    = try(var.pipelines[pipeline].pipeline_type, null)
       name             = var.pipelines[pipeline].name
       create_s3_source = var.pipelines[pipeline].create_s3_source
+      execution_mode   = try(var.pipelines[pipeline].execution_mode, "SUPERSEDED")
 
       stages = concat(
         [local.pipelines_source_stages[pipeline].source_stage],
@@ -110,12 +111,12 @@ locals {
             [
               try(var.pipelines[pipeline].stages[stage].buildspec, null) != null ?
               {
-                ProjectName = "${element([for codebuild in module.codebuild :
+                ProjectName = element([for codebuild in module.codebuild :
                   element([for project_name in codebuild.project_name :
                     project_name if project_name ==
                     replace(module.resource_names["codebuild"].standard, var.naming_prefix, "${var.naming_prefix}_${codebuild.pipeline_name}_${var.pipelines[pipeline].stages[stage].project_name}")
                   ], 0) if codebuild.pipeline_name == var.pipelines[pipeline].name
-                ], 0)}"
+                ], 0)
               } : {},
               try(var.pipelines[pipeline].approval_sns_subscribers, null) != null ?
               {
