@@ -12,7 +12,7 @@
 
 variable "pipelines" {
   description = "List of all custom pipelines to create."
-  type        = list(any)
+  type        = any
 }
 
 variable "additional_codebuild_projects" {
