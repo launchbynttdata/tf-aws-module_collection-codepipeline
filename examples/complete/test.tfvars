@@ -1,4 +1,3 @@
-# Replace the <> with the actual values
 pipelines = [
   {
     pipeline_type    = "V2"
@@ -69,3 +68,6 @@ pipelines = [
     ]
   }
 ]
+
+logical_product_family  = "terratest"
+logical_product_service = "cpmodule"
