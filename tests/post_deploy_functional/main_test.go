@@ -15,9 +15,9 @@ package test
 import (
 	"testing"
 
-	"github.com/nexient-llc/lcaf-component-terratest-common/lib"
-	"github.com/nexient-llc/lcaf-component-terratest-common/types"
-	"github.com/nexient-llc/tf-aws-wrapper_module-codepipelines/tests/testimpl"
+	"github.com/launchbynttdata/lcaf-component-terratest/lib"
+	"github.com/launchbynttdata/lcaf-component-terratest/types"
+	"github.com/launchbynttdata/tf-aws-module_collection-codepipeline/tests/testimpl"
 )
 
 const (

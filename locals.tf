@@ -18,6 +18,8 @@ locals {
     provisioner = "Terraform"
   }
 
+  naming_prefix = "${var.logical_product_family}-${var.logical_product_service}"
+
   codebuilds = [
     for pipeline in var.pipelines : {
       codebuild_projects = [
@@ -69,7 +71,7 @@ locals {
       create_s3_source = var.pipelines[i].create_s3_source
       source_stage = var.pipelines[i].create_s3_source ? merge(var.pipelines[i].source_stage, {
         configuration = merge(var.pipelines[i].source_stage.configuration, {
-          S3Bucket = replace(replace(module.resource_names["s3"].standard, var.naming_prefix, "${var.naming_prefix}-${var.pipelines[i].name}"), "_", "-")
+          S3Bucket = replace(replace(module.resource_names["s3"].standard, local.naming_prefix, "${local.naming_prefix}-${var.pipelines[i].name}"), "_", "-")
         })
       }) : var.pipelines[i].source_stage
 
@@ -114,7 +116,7 @@ locals {
                 ProjectName = element([for codebuild in module.codebuild :
                   element([for project_name in codebuild.project_name :
                     project_name if project_name ==
-                    replace(module.resource_names["codebuild"].standard, var.naming_prefix, "${var.naming_prefix}_${codebuild.pipeline_name}_${var.pipelines[pipeline].stages[stage].project_name}")
+                    replace(module.resource_names["codebuild"].standard, local.naming_prefix, "${local.naming_prefix}_${codebuild.pipeline_name}_${var.pipelines[pipeline].stages[stage].project_name}")
                   ], 0) if codebuild.pipeline_name == var.pipelines[pipeline].name
                 ], 0)
               } : {},

@@ -11,17 +11,17 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.40.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.52.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_codepipeline"></a> [codepipeline](#module\_codepipeline) | git::https://github.com/nexient-llc/tf-aws-module-codepipeline.git | 0.2.0 |
-| <a name="module_codebuild"></a> [codebuild](#module\_codebuild) | git::https://github.com/nexient-llc/tf-aws-wrapper_module-codebuild.git | 0.1.0 |
-| <a name="module_additional_codebuild_projects"></a> [additional\_codebuild\_projects](#module\_additional\_codebuild\_projects) | git::https://github.com/nexient-llc/tf-aws-wrapper_module-codebuild.git | 0.1.0 |
-| <a name="module_sns_topic"></a> [sns\_topic](#module\_sns\_topic) | git::https://github.com/nexient-llc/tf-aws-wrapper_module-sns.git | 0.1.0 |
-| <a name="module_resource_names"></a> [resource\_names](#module\_resource\_names) | git::https://github.com/nexient-llc/tf-module-resource_name.git | 0.1.0 |
+| <a name="module_codepipeline"></a> [codepipeline](#module\_codepipeline) | git::https://github.com/launchbynttdata/tf-aws-module_primitive-codepipeline.git | 1.0.0 |
+| <a name="module_codebuild"></a> [codebuild](#module\_codebuild) | git::https://github.com/launchbynttdata/tf-aws-module_collection-codebuild.git | 1.0.0 |
+| <a name="module_additional_codebuild_projects"></a> [additional\_codebuild\_projects](#module\_additional\_codebuild\_projects) | git::https://github.com/launchbynttdata/tf-aws-module_collection-codebuild.git | 1.0.0 |
+| <a name="module_sns_topic"></a> [sns\_topic](#module\_sns\_topic) | git::https://github.com/launchbynttdata/tf-aws-module_collection-sns.git | 1.0.0 |
+| <a name="module_resource_names"></a> [resource\_names](#module\_resource\_names) | git::https://github.com/launchbynttdata/tf-launch-module_library-resource_name.git | 1.0.0 |
 
 ## Resources
 
@@ -39,7 +39,8 @@
 | <a name="input_privileged_mode"></a> [privileged\_mode](#input\_privileged\_mode) | (Optional) If set to true, enables running the Docker daemon inside a Docker container on the CodeBuild instance. Used when building Docker images | `bool` | `false` | no |
 | <a name="input_build_image_pull_credentials_type"></a> [build\_image\_pull\_credentials\_type](#input\_build\_image\_pull\_credentials\_type) | Type of credentials AWS CodeBuild uses to pull images in your build.Valid values: CODEBUILD, SERVICE\_ROLE. When you use a cross-account or private registry image, you must use SERVICE\_ROLE credentials. | `string` | `"CODEBUILD"` | no |
 | <a name="input_environment_variables"></a> [environment\_variables](#input\_environment\_variables) | A list of maps, that contain the keys 'name', 'value', and 'type' to be used as additional environment variables for the build. Valid types are 'PLAINTEXT', 'PARAMETER\_STORE', or 'SECRETS\_MANAGER' | <pre>list(object(<br>    {<br>      name  = string<br>      value = string<br>      type  = string<br>    }<br>  ))</pre> | `[]` | no |
-| <a name="input_naming_prefix"></a> [naming\_prefix](#input\_naming\_prefix) | Prefix for the provisioned resources. | `string` | `"platform"` | no |
+| <a name="input_logical_product_family"></a> [logical\_product\_family](#input\_logical\_product\_family) | (Required) Name of the product family for which the resource is created.<br>    Example: org\_name, department\_name. | `string` | `"launch"` | no |
+| <a name="input_logical_product_service"></a> [logical\_product\_service](#input\_logical\_product\_service) | (Required) Name of the product service for which the resource is created.<br>    For example, backend, frontend, middleware etc. | `string` | `"servicename"` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment in which the resource should be provisioned like dev, qa, prod etc. | `string` | `"dev"` | no |
 | <a name="input_environment_number"></a> [environment\_number](#input\_environment\_number) | The environment count for the respective environment. Defaults to 000. Increments in value of 1 | `string` | `"000"` | no |
 | <a name="input_region"></a> [region](#input\_region) | AWS Region in which the infra needs to be provisioned | `string` | `"us-east-2"` | no |

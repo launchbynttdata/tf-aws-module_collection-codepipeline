@@ -1,9 +1,9 @@
-module github.com/nexient-llc/tf-aws-wrapper_module-codepipelines
+module github.com/launchbynttdata/tf-aws-module_collection-codepipeline
 
 go 1.21
 
 require (
-	github.com/nexient-llc/lcaf-component-terratest-common v1.0.3
+	github.com/launchbynttdata/lcaf-component-terratest v1.0.3
 	github.com/stretchr/testify v1.8.1
 )
 
