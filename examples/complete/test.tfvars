@@ -22,7 +22,7 @@ pipelines = [
       version    = "1"
       configuration = {
         S3ObjectKey          = "trigger_pipeline.zip"
-        PollForSourceChanges = "false"
+        PollForSourceChanges = "true"
       }
       input_artifacts  = []
       output_artifacts = ["SourceArtifact"]

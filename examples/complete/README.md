@@ -11,7 +11,9 @@ This example creates 2 pipelines with 2 codebuild stages.
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.52.0 |
 
 ## Modules
 
@@ -21,7 +23,9 @@ No providers.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_s3_object.pipeline_trigger_object](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object) | resource |
 
 ## Inputs
 

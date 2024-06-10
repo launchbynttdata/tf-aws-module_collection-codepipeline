@@ -54,15 +54,17 @@ module "additional_codebuild_projects" {
 }
 
 module "sns_topic" {
-  source   = "git::https://github.com/launchbynttdata/tf-aws-module_collection-sns.git?ref=1.0.0"
+  #TODO: point at a tag once the PR for sns is merged
+  source   = "git::https://github.com/launchbynttdata/tf-aws-module_collection-sns.git?ref=d452e81"
   for_each = { for k in compact([for k, v in local.sns_topics : v.created_by != null ? k : null]) : k => local.sns_topics[k] }
 
-  subscriptions      = each.value.subscriptions != null ? each.value.subscriptions : null
-  created_by         = each.value.created_by
-  naming_prefix      = "${local.naming_prefix}_${each.value.created_by}"
-  environment_number = var.environment_number
-  environment        = var.environment
-  resource_number    = var.resource_number
+  subscriptions           = each.value.subscriptions != null ? each.value.subscriptions : null
+  created_by              = each.value.created_by
+  logical_product_family  = var.logical_product_family
+  logical_product_service = var.logical_product_service
+  environment_number      = var.environment_number
+  environment             = var.environment
+  resource_number         = var.resource_number
 
   tags = var.tags
 }
