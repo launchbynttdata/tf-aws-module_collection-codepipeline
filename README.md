@@ -21,7 +21,7 @@
 | <a name="module_codebuild"></a> [codebuild](#module\_codebuild) | git::https://github.com/launchbynttdata/tf-aws-module_collection-codebuild.git | 1.0.0 |
 | <a name="module_additional_codebuild_projects"></a> [additional\_codebuild\_projects](#module\_additional\_codebuild\_projects) | git::https://github.com/launchbynttdata/tf-aws-module_collection-codebuild.git | 1.0.0 |
 | <a name="module_sns_topic"></a> [sns\_topic](#module\_sns\_topic) | git::https://github.com/launchbynttdata/tf-aws-module_collection-sns.git | 1.0.1 |
-| <a name="module_resource_names"></a> [resource\_names](#module\_resource\_names) | git::https://github.com/launchbynttdata/tf-launch-module_library-resource_name.git | 1.0.0 |
+| <a name="module_resource_names"></a> [resource\_names](#module\_resource\_names) | git::https://github.com/launchbynttdata/tf-launch-module_library-resource_name.git | 1.0.1 |
 
 ## Resources
 
