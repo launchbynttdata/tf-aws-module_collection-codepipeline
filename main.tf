@@ -54,8 +54,7 @@ module "additional_codebuild_projects" {
 }
 
 module "sns_topic" {
-  #TODO: point at a tag once the PR for sns is merged
-  source   = "git::https://github.com/launchbynttdata/tf-aws-module_collection-sns.git?ref=d452e81"
+  source   = "git::https://github.com/launchbynttdata/tf-aws-module_collection-sns.git?ref=1.0.1"
   for_each = { for k in compact([for k, v in local.sns_topics : v.created_by != null ? k : null]) : k => local.sns_topics[k] }
 
   subscriptions           = each.value.subscriptions != null ? each.value.subscriptions : null
