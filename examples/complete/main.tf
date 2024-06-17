@@ -15,6 +15,16 @@ module "codepipeline" {
 
   additional_codebuild_projects = var.additional_codebuild_projects
   pipelines                     = var.pipelines
+  logical_product_family        = var.logical_product_family
+  logical_product_service       = var.logical_product_service
 
   tags = var.tags
+}
+
+resource "aws_s3_object" "pipeline_trigger_object" {
+  depends_on = [module.codepipeline]
+  # The codepipeline primitive module doesn't expose the S3 bucket name, so we have to hardcode it here
+  bucket = "terratest-cpmodule-pr-merge-useast2-dev-000-s3-000"
+  key    = "trigger_pipeline.zip"
+  source = "trigger_pipeline.zip"
 }

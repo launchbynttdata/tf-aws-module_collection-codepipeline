@@ -1,4 +1,3 @@
-# Replace the <> with the actual values
 pipelines = [
   {
     pipeline_type    = "V2"
@@ -23,7 +22,7 @@ pipelines = [
       version    = "1"
       configuration = {
         S3ObjectKey          = "trigger_pipeline.zip"
-        PollForSourceChanges = "false"
+        PollForSourceChanges = "true"
       }
       input_artifacts  = []
       output_artifacts = ["SourceArtifact"]
@@ -69,3 +68,6 @@ pipelines = [
     ]
   }
 ]
+
+logical_product_family  = "terratest"
+logical_product_service = "cpmodule"

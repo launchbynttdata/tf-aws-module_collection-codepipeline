@@ -12,10 +12,10 @@
 
 output "id" {
   description = "The codepipeline ID"
-  value       = module.codepipeline[*].id
+  value       = module.codepipeline.id
 }
 
 output "arn" {
   description = "The codepipeline ARN"
-  value       = module.codepipeline[*].arn
+  value       = module.codepipeline.arn
 }
