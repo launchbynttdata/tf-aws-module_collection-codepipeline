@@ -25,7 +25,7 @@ module "codepipeline" {
 }
 
 module "codebuild" {
-  source = "git::https://github.com/launchbynttdata/tf-aws-module_collection-codebuild.git?ref=1.0.0"
+  source = "git::https://github.com/launchbynttdata/tf-aws-module_collection-codebuild.git?ref=1.0.2"
   count  = length(local.codebuilds)
 
   codebuild_projects      = local.codebuilds[count.index].codebuild_projects
@@ -40,10 +40,11 @@ module "codebuild" {
 }
 
 module "additional_codebuild_projects" {
-  source = "git::https://github.com/launchbynttdata/tf-aws-module_collection-codebuild.git?ref=1.0.0"
+  source = "git::https://github.com/launchbynttdata/tf-aws-module_collection-codebuild.git?ref=1.0.2"
   count  = var.additional_codebuild_projects != null ? 1 : 0
 
   codebuild_projects      = [var.additional_codebuild_projects[count.index]]
+  description             = var.additional_codebuild_projects[count.index].description
   logical_product_family  = var.logical_product_family
   logical_product_service = var.logical_product_service
   environment_number      = var.environment_number
