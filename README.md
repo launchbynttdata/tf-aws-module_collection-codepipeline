@@ -11,17 +11,17 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.52.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.57.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_codepipeline"></a> [codepipeline](#module\_codepipeline) | git::https://github.com/launchbynttdata/tf-aws-module_primitive-codepipeline.git | 1.0.0 |
-| <a name="module_codebuild"></a> [codebuild](#module\_codebuild) | git::https://github.com/launchbynttdata/tf-aws-module_collection-codebuild.git | 1.0.0 |
-| <a name="module_additional_codebuild_projects"></a> [additional\_codebuild\_projects](#module\_additional\_codebuild\_projects) | git::https://github.com/launchbynttdata/tf-aws-module_collection-codebuild.git | 1.0.0 |
-| <a name="module_sns_topic"></a> [sns\_topic](#module\_sns\_topic) | git::https://github.com/launchbynttdata/tf-aws-module_collection-sns.git | 1.0.1 |
-| <a name="module_resource_names"></a> [resource\_names](#module\_resource\_names) | git::https://github.com/launchbynttdata/tf-launch-module_library-resource_name.git | 1.0.1 |
+| <a name="module_codepipeline"></a> [codepipeline](#module\_codepipeline) | terraform.registry.launch.nttdata.com/module_primitive/codepipeline/aws | ~> 1.0 |
+| <a name="module_codebuild"></a> [codebuild](#module\_codebuild) | terraform.registry.launch.nttdata.com/module_collection/codebuild/aws | ~> 1.0 |
+| <a name="module_additional_codebuild_projects"></a> [additional\_codebuild\_projects](#module\_additional\_codebuild\_projects) | terraform.registry.launch.nttdata.com/module_collection/codebuild/aws | ~> 1.0 |
+| <a name="module_sns_topic"></a> [sns\_topic](#module\_sns\_topic) | terraform.registry.launch.nttdata.com/module_collection/sns/aws | ~> 1.0 |
+| <a name="module_resource_names"></a> [resource\_names](#module\_resource\_names) | terraform.registry.launch.nttdata.com/module_library/resource_name/launch | ~> 1.0 |
 
 ## Resources
 

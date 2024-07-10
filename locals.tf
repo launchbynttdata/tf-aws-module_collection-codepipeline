@@ -25,6 +25,7 @@ locals {
       codebuild_projects = [
         for stage in pipeline.stages : {
           name                              = stage.project_name
+          description                       = try(stage.description, null)
           buildspec                         = stage.buildspec
           build_image                       = try(stage.build_image, var.build_image)
           privileged_mode                   = try(stage.privileged_mode, var.privileged_mode)
@@ -98,12 +99,13 @@ locals {
       stages = concat(
         [local.pipelines_source_stages[pipeline].source_stage],
         [for stage in range(length(var.pipelines[pipeline].stages)) : {
-          stage_name = var.pipelines[pipeline].stages[stage].stage_name
-          name       = var.pipelines[pipeline].stages[stage].name
-          category   = var.pipelines[pipeline].stages[stage].category
-          owner      = try(var.pipelines[pipeline].stages[stage].owner, "AWS")
-          provider   = var.pipelines[pipeline].stages[stage].provider
-          version    = try(var.pipelines[pipeline].stages[stage].version, "1")
+          stage_name  = var.pipelines[pipeline].stages[stage].stage_name
+          name        = var.pipelines[pipeline].stages[stage].name
+          description = try(var.pipelines[pipeline].stages[stage].description, null)
+          category    = var.pipelines[pipeline].stages[stage].category
+          owner       = try(var.pipelines[pipeline].stages[stage].owner, "AWS")
+          provider    = var.pipelines[pipeline].stages[stage].provider
+          version     = try(var.pipelines[pipeline].stages[stage].version, "1")
           # The follow logic returns the element at the index if the provider for the stage equals "CodeBuild", "Manual", or other.
           # Within each element, there is logic to build the configuration key-value
           # The "CodeBuild" provider, will set the codebuild project based on which pipeline created it and its name.

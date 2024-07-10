@@ -11,8 +11,10 @@
 // limitations under the License.
 
 module "codepipeline" {
-  source = "git::https://github.com/launchbynttdata/tf-aws-module_primitive-codepipeline.git?ref=1.0.0"
-  count  = length(local.pipelines)
+  source  = "terraform.registry.launch.nttdata.com/module_primitive/codepipeline/aws"
+  version = "~> 1.0"
+
+  count = length(local.pipelines)
 
   name             = replace(module.resource_names["pipeline"].standard, local.naming_prefix, "${local.naming_prefix}_${local.pipelines[count.index].name}")
   create_s3_source = local.pipelines[count.index].create_s3_source
@@ -25,8 +27,10 @@ module "codepipeline" {
 }
 
 module "codebuild" {
-  source = "git::https://github.com/launchbynttdata/tf-aws-module_collection-codebuild.git?ref=1.0.0"
-  count  = length(local.codebuilds)
+  source  = "terraform.registry.launch.nttdata.com/module_collection/codebuild/aws"
+  version = "~> 1.0"
+
+  count = length(local.codebuilds)
 
   codebuild_projects      = local.codebuilds[count.index].codebuild_projects
   logical_product_family  = var.logical_product_family
@@ -40,10 +44,13 @@ module "codebuild" {
 }
 
 module "additional_codebuild_projects" {
-  source = "git::https://github.com/launchbynttdata/tf-aws-module_collection-codebuild.git?ref=1.0.0"
-  count  = var.additional_codebuild_projects != null ? 1 : 0
+  source  = "terraform.registry.launch.nttdata.com/module_collection/codebuild/aws"
+  version = "~> 1.0"
+
+  count = var.additional_codebuild_projects != null ? 1 : 0
 
   codebuild_projects      = [var.additional_codebuild_projects[count.index]]
+  description             = var.additional_codebuild_projects[count.index].description
   logical_product_family  = var.logical_product_family
   logical_product_service = var.logical_product_service
   environment_number      = var.environment_number
@@ -54,7 +61,9 @@ module "additional_codebuild_projects" {
 }
 
 module "sns_topic" {
-  source   = "git::https://github.com/launchbynttdata/tf-aws-module_collection-sns.git?ref=1.0.1"
+  source  = "terraform.registry.launch.nttdata.com/module_collection/sns/aws"
+  version = "~> 1.0"
+
   for_each = { for k in compact([for k, v in local.sns_topics : v.created_by != null ? k : null]) : k => local.sns_topics[k] }
 
   subscriptions           = each.value.subscriptions != null ? each.value.subscriptions : null
@@ -69,7 +78,8 @@ module "sns_topic" {
 }
 
 module "resource_names" {
-  source = "git::https://github.com/launchbynttdata/tf-launch-module_library-resource_name.git?ref=1.0.1"
+  source  = "terraform.registry.launch.nttdata.com/module_library/resource_name/launch"
+  version = "~> 1.0"
 
   for_each = var.resource_names_map
 

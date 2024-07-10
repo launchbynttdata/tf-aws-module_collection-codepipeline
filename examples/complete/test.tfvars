@@ -34,6 +34,7 @@ pipelines = [
       {
         stage_name      = "Terragrunt-Plan"
         name            = "TG-Plan"
+        description     = "Terragrunt Plan"
         category        = "Build"
         owner           = "AWS"
         provider        = "CodeBuild"
@@ -46,6 +47,7 @@ pipelines = [
       {
         stage_name      = "Trigger-QA"
         name            = "Trigger-Env"
+        description     = "Trigger QA Environment"
         category        = "Build"
         owner           = "AWS"
         provider        = "CodeBuild"
@@ -58,6 +60,7 @@ pipelines = [
       {
         stage_name      = "Manual-Approval"
         name            = "Manual-Approval"
+        description     = "Manual Approval"
         category        = "Approval"
         owner           = "AWS"
         provider        = "Manual"
