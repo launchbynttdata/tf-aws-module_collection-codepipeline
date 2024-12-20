@@ -13,7 +13,13 @@
 variable "pipelines" {
   description = "List of all custom pipelines to create."
   type        = any
-  default     = ""
+  default     = []
+}
+
+variable "pipeline_common_environment" {
+  description = "Common environment variables in a JSON document to be used by all pipelines."
+  type        = any
+  default     = []
 }
 
 variable "additional_codebuild_projects" {

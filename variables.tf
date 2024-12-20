@@ -15,6 +15,12 @@ variable "pipelines" {
   type        = any
 }
 
+variable "pipeline_common_environment" {
+  description = "Common environment variables in a JSON document to be used by all pipelines."
+  type        = any
+  default     = []
+}
+
 variable "additional_codebuild_projects" {
   description = "Codebuild to trigger other pipelines. Used by the lambdas to trigger the correct pipeline."
   type        = any

@@ -20,6 +20,8 @@ locals {
 
   naming_prefix = "${var.logical_product_family}-${var.logical_product_service}"
 
+  common_env_vars = try(var.pipeline_common_environment, [])
+
   codebuilds = [
     for pipeline in var.pipelines : {
       codebuild_projects = [
@@ -89,7 +91,7 @@ locals {
     }
   }
 
-  pipelines = [
+  pipelines_tmp = [
     for pipeline in range(length(var.pipelines)) : {
       pipeline_type    = try(var.pipelines[pipeline].pipeline_type, null)
       name             = var.pipelines[pipeline].name
@@ -135,6 +137,40 @@ locals {
           namespace        = try(var.pipelines[pipeline].stages[stage].namespace, null)
         }]
       )
+    }
+  ]
+
+  pipelines = [
+    for pipeline in local.pipelines_tmp : {
+      pipeline_type    = try(pipeline.pipeline_type, null)
+      name             = pipeline.name
+      create_s3_source = pipeline.create_s3_source
+      execution_mode   = try(pipeline.execution_mode, "SUPERSEDED")
+
+      stages = [
+        for stage in pipeline.stages : {
+          stage_name  = stage.stage_name
+          name        = stage.name
+          description = try(stage.description, null)
+          category    = stage.category
+          owner       = try(stage.owner, "AWS")
+          provider    = stage.provider
+          version     = try(stage.version, "1")
+          configuration = stage.provider == "CodeBuild" && try(stage.configuration.EnvironmentVariables, null) != null ? merge(stage.configuration, {
+            EnvironmentVariables = jsonencode(
+              distinct(concat(
+                jsondecode(stage.configuration.EnvironmentVariables),
+                local.common_env_vars
+              ))
+            )
+          }) : stage.configuration
+          input_artifacts  = try(stage.input_artifacts, [])
+          output_artifacts = try(stage.output_artifacts, [])
+          run_order        = try(stage.run_order, null)
+          region           = try(stage.region, null)
+          namespace        = try(stage.namespace, null)
+        }
+      ]
     }
   ]
 
