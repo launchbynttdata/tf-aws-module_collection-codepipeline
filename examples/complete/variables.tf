@@ -12,8 +12,8 @@
 
 variable "pipelines" {
   description = "List of all custom pipelines to create."
-  type        = any
-  default     = ""
+  type        = list(any)
+  default     = []
 }
 
 variable "additional_codebuild_projects" {
